@@ -44,8 +44,17 @@ const Main = (() => {
 
     const form = document.forms[0];
 
-    const autocomplete = () => {
-        autocompleteField.innerHTML = `<span> Test1 </span> <span> Test2 </span>`;
+    const autocomplete = (eventKey) => {
+        eventKey.preventDefault();
+        autocompleteField.innerHTML = null;
+        let regex = `.*` + search.value + `.*`;
+        Config.Links.map(([gName, Links]) => {
+            Links.map(([lName, url]) => {
+                if (lName.match(regex) || url.match(regex)) {
+                    autocompleteField.innerHTML += `<a href="${url}"> ${lName} </a>`
+                }
+            });
+        });
     }
 
     const init = () => {
@@ -68,19 +77,14 @@ const Main = (() => {
 
         document.addEventListener("keydown", e => e.key.length === 1 && search.focus());
         //Search on <enter>
-        search.addEventListener("keydown", () => (window.event ? event.keyCode : e.which) == 13 && form.submit());
+        search.addEventListener("keydown", e => (window.event ? event.keyCode : e.which) == 13 && form.submit());
         //Autocomplete on <tab>
-        search.addEventListener('keydown', () => (window.event ? event.keyCode : e.which) == 9 && autocomplete());
+        search.addEventListener('keydown', e => (window.event ? event.keyCode : e.which) == 9 && autocomplete(e));
     };
 
     return {
         init,
     };
 })();
-
-
-function autocomplete() {
-    Main.autocomplete();
-}
 
 Main.init()
