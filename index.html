@@ -3,28 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Home</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <title>Hello friend.</title>
 </head>
 
 <body>
-    <main>
-        <div class="prompt">[<span data-Name>user</span>@<span>home</span> ~]$ tree</div>
-        <div class="tree">
-            <h1>.</h1>
-            <ul id="list">
-                <li>
-                    <h1>[error]</h1>
-                </li>
-            </ul>
-        </div>
-        <div class="prompt">[<span data-Name>user</span>@<span>home</span> ~]$ ddg</div>
+<main>
+    <div class="prompt">[<span data-Name>user</span>@<span>home</span> ~]$ tree</div>
+    <div class="tree">
+        <h1>.</h1>
+        <ul id="list">
+            <li>
+                <h1>[error]</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="prompt">[<span data-Name>user</span>@<span>home</span> ~]$ ddg</div>
 
-        <form action="https://duckduckgo.com/" method="GET" autocomplete="off">
-            <h1>search:&nbsp;</h1>
-            <textarea type="text" name="q" id="search" wrap="hard" autofocus></textarea>
-        </form>
-    </main>
+    <form action="https://duckduckgo.com/" autocomplete="off" method="GET">
+        <h1>search:&nbsp;</h1>
+        <input autofocus id="search" name="q" type="text" wrap="hard"></input>
+    </form>
+
+    <div class="autocomplete" id="autocomplete"></div>
+</main>
 </body>
 
 </html>
