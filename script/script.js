@@ -40,21 +40,31 @@ const Main = (() => {
     const list = document.getElementById("list");
     const names = document.querySelectorAll("[data-Name]");
     const search = document.getElementById("search");
-    const autocompleteField = document.getElementById('autocomplete');
+    const autocompleteResult = document.getElementById('autocomplete');
 
     const form = document.forms[0];
 
     const autocomplete = (eventKey) => {
         eventKey.preventDefault();
-        autocompleteField.innerHTML = null;
+        autocompleteResult.innerHTML = null;
         let regex = `.*` + search.value + `.*`;
+        let resultCount = 0;
+        let resultStr = new String(); // Autocomplete HTML result (in case of multiple matchs)
+        let uniqueResult = new String(); // Autocomplete search result (in case of 1 result)
         Config.Links.map(([gName, Links]) => {
             Links.map(([lName, url]) => {
                 if (lName.match(regex) || url.match(regex)) {
-                    autocompleteField.innerHTML += `<a href="${url}"> ${lName} </a>`
+                    resultCount++;
+                    resultStr += `<a href="${url}"> ${lName} </a>`;
+                    uniqueResult = lName;
                 }
             });
         });
+        if (resultCount == 1) {
+            search.value = uniqueResult;
+        } else {
+            autocompleteResult.innerHTML = resultStr
+        }
     }
 
     const init = () => {
