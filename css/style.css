@@ -135,3 +135,7 @@ form h1 {
     resize: none;
     max-width: 50vw;
 }
+
+.autocomplete-matchs {
+    margin: 0 5px;
+}
